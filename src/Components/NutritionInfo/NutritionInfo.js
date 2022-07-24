@@ -29,20 +29,34 @@ export default function NutritionInfo({
     (userProteinConsumed / userProteinTarget) *
     100
   ).toPrecision(2);
+  const data = [
+    { title: "PROTEIN", value: userProteinConsumed, color: "#F45C84" },
+    { title: "FATS", value: userCarbConsumed, color: "#03C6FA" },
+    { title: "CARBS", value: userFatConsumed, color: "#F0C50F" },
+  ];
+
   function makeTooltipContent() {
     return (
-      <div className="w-64 rounded-xl">
-        <div className="mb-2 bg-[#1B222A]">
-          <span>Protein : {userProteinTarget}</span>
-          <ProgressBar
-            baseBgColor="#101317"
-            bgColor="#F45C84"
-            customLabel={`${userProteinConsumed}g`}
-            completed={proteinPercent}
-          />
+      <div className="w-72 ">
+        <div className="mb-2 bg-[#1B222A] p-2  rounded-xl">
+          <div className="flex justify-between mb-1 text-lg">
+            <div>Protein</div>
+            <div>{userProteinTarget}g</div>
+          </div>
+          <div>
+            <ProgressBar
+              baseBgColor="#101317"
+              bgColor="#F45C84"
+              customLabel={`${userProteinConsumed}g`}
+              completed={proteinPercent}
+            />
+          </div>
         </div>
-        <div className="mb-2 bg-[#1B222A]">
-          <span>Fats : {userFatTarget}</span>
+        <div className="mb-2 bg-[#1B222A] p-2 rounded-xl">
+          <div className=" flex justify-between mb-1 text-lg">
+            <div>Fats</div>
+            <div>{userFatTarget}g</div>
+          </div>
           <ProgressBar
             baseBgColor="#101317"
             bgColor="#03C6FA"
@@ -50,8 +64,11 @@ export default function NutritionInfo({
             completed={fatPercent}
           />
         </div>
-        <div className="bg-[#1B222A]">
-          <span>Carbs : {userCarbTarget}</span>
+        <div className="bg-[#1B222A] p-2 rounded-xl">
+          <div className="flex justify-between mb-1 text-lg">
+            <div>Carbs</div>
+            <div>{userCarbTarget}g</div>
+          </div>
           <ProgressBar
             baseBgColor="#101317"
             bgColor="#F0C50F"
@@ -63,19 +80,19 @@ export default function NutritionInfo({
     );
   }
   const incrementSteps = (ammount) => {
-    console.log(calorieTarget);
     setCalorieTarget(calorieTarget + ammount);
   };
   const decrementSteps = (ammount) => {
     setCalorieTarget(calorieTarget - ammount);
   };
   useEffect(() => {}, [calorieTarget]);
+
   return (
     <div className="flex gap-2 items-center">
       <div
         style={{ width: 80, height: 80 }}
         data-tip=""
-        data-for="chart"
+        data-for="macro-view"
         onMouseOver={() => {
           setHovered(1);
         }}
@@ -86,25 +103,38 @@ export default function NutritionInfo({
         <PieChart
           radius={50}
           lineWidth={20}
-          label={() => calorieTarget}
-          labelStyle={{
-            fontSize: "25px",
-            fontFamily: "sans-serif",
-            fill: "#FFFF",
-          }}
+          // label={() => `${userCalorieIntake} Calories`}
+          label={({ x, y, dx, dy, dataEntry }) => (
+            <text
+              dominantBaseline="central"
+              textAnchor="middle"
+              style={{
+                pointerEvents: "none",
+              }}
+            >
+              <tspan x={x} y={y - 10} fill="#ffff" style={{ fontSize: "25px" }}>
+                {calorieTarget}
+              </tspan>
+              <tspan
+                x={x}
+                y={y + 10}
+                fill="#A2A1A3"
+                style={{ fontSize: "14px" }}
+              >
+                Calories
+              </tspan>
+            </text>
+          )}
           labelPosition={0}
           background="#bfbfbf"
           rounded
-          data={[
-            { title: "PROTEIN", value: userProteinConsumed, color: "#F45C84" },
-            { title: "FATS", value: userCarbConsumed, color: "#03C6FA" },
-            { title: "CARBS", value: userFatConsumed, color: "#F0C50F" },
-          ]}
+          data={data}
         />
         <ReactTooltip
+          backgroundColor="#333b44"
           className="tooltip-custom"
           place="bottom"
-          id="chart"
+          id="macro-view"
           effect="solid"
           getContent={() =>
             typeof hovered === "number" ? makeTooltipContent() : null
@@ -122,7 +152,7 @@ export default function NutritionInfo({
           <p className="text-[#FFFFFF] font-black ">
             {(userCalorieTarget / 1000).toPrecision(2)}K
           </p>
-          <p className="text-[#FFFFFF] font-thin">Walked</p>
+          <p className="text-[#A2A1A3] ">Target</p>
         </div>
         <div
           className="bg-[#101317] text-center flex-1 rounded-md cursor-pointer"

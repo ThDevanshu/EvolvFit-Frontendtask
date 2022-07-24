@@ -47,9 +47,9 @@ export default function DateInfo({
         </div>
       </div>
       <div
-        className={`bg-[#101317] w-8 min-h-full flex items-center justify-center text-2xl ${
-          feedback === true ? "bg-[#CC3838]" : ""
-        } rounded-md cursor-pointer`}
+        className={`${
+          feedback === true ? "bg-[#CC3838]" : "bg-[#101317]"
+        } w-8 min-h-full flex items-center justify-center text-2xl rounded-md cursor-pointer`}
       >
         <p className="text-[#FFFFFF] ">{feedback == true ? "!" : ">"}</p>
       </div>

@@ -33,7 +33,7 @@ export default function StepInfo({ userStepTarget, userStepsWalked }) {
         >
           <div className="text-center">
             <h3 className="text-[#FFFFFF] font-black">{stepsWalked}</h3>
-            <h4 className="text-[#FFFFFF] font-thin">Walked</h4>
+            <h4 className="text-[#A2A1A3]">Walked</h4>
           </div>
         </CircularProgressbarWithChildren>
       </div>
@@ -48,7 +48,7 @@ export default function StepInfo({ userStepTarget, userStepsWalked }) {
           <p className="text-[#FFFFFF] font-black ">
             {(userStepTarget / 1000).toPrecision(3)}K
           </p>
-          <p className="text-[#FFFFFF] font-thin">Walked</p>
+          <p className="text-[#A2A1A3]">Walked</p>
         </div>
         <div
           className="bg-[#101317] text-center flex-1 rounded-md cursor-pointer"

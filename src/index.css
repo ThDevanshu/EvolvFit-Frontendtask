@@ -18,5 +18,6 @@ code {
 }
 
 .tooltip-custom {
-  background-color: #181a1c !important;
+  opacity: 1 !important;
+  border-radius: 5% !important;
 }
