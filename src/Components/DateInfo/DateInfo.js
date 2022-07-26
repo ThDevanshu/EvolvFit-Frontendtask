@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 export default function DateInfo({
+  userId,
   userPerformedDate,
   userScheduledDate,
   feedback,
@@ -12,6 +14,10 @@ export default function DateInfo({
   const isDateSame =
     currentDateMonth === scheduledDateMonth &&
     currentDateDate == scheduledDateDate;
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/workout/${userId}`);
+  };
   return (
     <div className="flex gap-2 text-center">
       <div>
@@ -50,6 +56,7 @@ export default function DateInfo({
         className={`${
           feedback === true ? "bg-[#CC3838]" : "bg-[#101317]"
         } w-8 min-h-full flex items-center justify-center text-2xl rounded-md cursor-pointer`}
+        onClick={handleClick}
       >
         <p className="text-[#FFFFFF] ">{feedback == true ? "!" : ">"}</p>
       </div>

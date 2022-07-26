@@ -44,6 +44,7 @@ export default function UserRow({ item }) {
       </div>
       <div className={`${isOpen === true ? "block" : "hidden"} md:block`}>
         <DateInfo
+          userId={item.userID}
           userPerformedDate={item.userPerformedDate}
           userScheduledDate={item.userScheduledDate}
           feedback={item.feedback}
@@ -51,6 +52,7 @@ export default function UserRow({ item }) {
       </div>
       <div className={`${isOpen === true ? "block" : "hidden"} md:block`}>
         <NutritionInfo
+          userId={item.userID}
           userCalorieIntake={item.userCalorieIntake}
           userCalorieTarget={item.userCalorieTarget}
           userProteinConsumed={item.userProteinConsumed}
