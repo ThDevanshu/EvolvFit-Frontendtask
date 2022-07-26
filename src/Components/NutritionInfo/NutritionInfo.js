@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
+import { useNavigate } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 import ProgressBar from "@ramonak/react-progress-bar";
-
-import {
-  CircularProgressbarWithChildren,
-  buildStyles,
-} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function NutritionInfo({
@@ -34,7 +30,10 @@ export default function NutritionInfo({
     { title: "FATS", value: userCarbConsumed, color: "#03C6FA" },
     { title: "CARBS", value: userFatConsumed, color: "#F0C50F" },
   ];
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/diet");
+  };
   function makeTooltipContent() {
     return (
       <div className="w-72 ">
@@ -161,7 +160,10 @@ export default function NutritionInfo({
           <p className="text-[#FFFFFF] text-base font-black">-</p>
         </div>
       </div>
-      <div className="bg-[#101317] w-8 h-20 flex items-center justify-center text-2xl rounded-md cursor-pointer">
+      <div
+        onClick={handleClick}
+        className="bg-[#101317] w-8 h-20 flex items-center justify-center text-2xl rounded-md cursor-pointer"
+      >
         <p className="text-[#FFFFFF] ">{">"}</p>
       </div>
     </div>
