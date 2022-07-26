@@ -13,7 +13,7 @@ export default function DateInfo({
   const scheduledDateDate = scheduledDate.getDate();
   const isDateSame =
     currentDateMonth === scheduledDateMonth &&
-    currentDateDate == scheduledDateDate;
+    currentDateDate === scheduledDateDate;
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/workout/${userId}`);
