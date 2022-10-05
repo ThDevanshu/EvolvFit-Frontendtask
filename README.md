@@ -23,4 +23,3 @@ After successfully installing the dependencies run the following to start web ap
 ```bash
   npm start
 ```
-DEVANSHU
